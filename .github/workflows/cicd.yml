@@ -66,19 +66,6 @@ jobs:
         run: npm test
 
 
-      - name: Debug Sonarqube environment
-        run: |
-            echo "SONAR_HOST_URL='${SONAR_HOST_URL}'"
-            if [ -n "$SONAR_TOKEN" ]; then
-              echo "SONAR_TOKEN is set"
-            else
-              echo "SONAR_TOKEN is NOT set"
-            fi
-        env:
-           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-     
-
 
       # ---- SonarQube static analysis + quality gate ----
       - name: SonarQube scan
@@ -86,13 +73,6 @@ jobs:
         env:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      - name: Debug Quality Gate environment
-        run: |
-          echo "PATH=$PATH"
-          which jq || true
-          ls -l /usr/bin/jq || true
-          jq --version || true
 
 
       - name: SonarQube quality gate

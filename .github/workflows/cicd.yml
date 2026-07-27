@@ -87,12 +87,12 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-       - name: Debug Quality Gate environment
-            run: |
-              echo "PATH=$PATH"
-              which jq || true
-              ls -l /usr/bin/jq || true
-              jq --version || true
+      - name: Debug Quality Gate environment
+        run: |
+          echo "PATH=$PATH"
+          which jq || true
+          ls -l /usr/bin/jq || true
+          jq --version || true
 
 
       - name: SonarQube quality gate

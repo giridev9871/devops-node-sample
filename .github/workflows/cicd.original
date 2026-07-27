@@ -147,8 +147,11 @@ jobs:
       - name: Select target host
         id: target
         run: |
-          echo "host=${{ secrets.EC2_HOST }}" >> "$GITHUB_OUTPUT"
-
+          if [ "${{ github.event.inputs.environment }}" = "prod" ]; then
+            echo "host=${{ secrets.EC2_HOST_PROD }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "host=${{ secrets.EC2_HOST_DEV }}" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Copy artifact to EC2 and restart service
         env:
